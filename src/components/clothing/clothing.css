@@ -1,0 +1,11 @@
+.clothingContainer {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 20% 20% 20% 20%;
+}
+
+.clothingItems {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    justify-content: space-between;
+}
