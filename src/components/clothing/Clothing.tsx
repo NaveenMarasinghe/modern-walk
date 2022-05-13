@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./clothing.css";
 import Card from "../card/Card";
+import { Items } from "../card/Card";
 
 interface IProps {
   category: string;
@@ -12,19 +13,6 @@ interface ICategoryDetails {
   url?: string;
   category?: string;
 }
-
-type Items = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-};
 
 export default function Clothing({ category }: IProps) {
   const [items, setItems] = useState<Items[] | null>(null);

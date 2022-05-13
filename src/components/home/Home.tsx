@@ -3,19 +3,7 @@ import "./home.css";
 import Card from "../card/Card";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-type Items = {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-};
+import { Items } from "../card/Card";
 
 const Home: React.FC = () => {
   const [items, setItems] = useState<Items[]>([]);

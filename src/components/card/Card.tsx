@@ -1,6 +1,6 @@
 import "./card.css";
 
-type Items = {
+export type Items = {
   id: number;
   title: string;
   price: number;
