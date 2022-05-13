@@ -1,37 +1,77 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import "./clothing.css";
-import Card from '../card/Card'
+import Card from "../card/Card";
 
-export default function Clothing({ category }) {
+interface IProps {
+  category: string;
+}
 
-    const [items, setItems] = useState([]);
-    const [categoryDetails, setCategoryDetails] = useState({});
+interface ICategoryDetails {
+  id: number;
+  url?: string;
+  category?: string;
+}
 
-    useEffect(() => {
-        if (category === 'women') {
-            setCategoryDetails({ id: 1, category: "Women's Clothing", url: "https://fakestoreapi.com/products/category/women's clothing" })
-        } else if (category === 'men') {
-            setCategoryDetails({ id: 2, category: "Men's Clothing", url: "https://fakestoreapi.com/products/category/men's clothing" })
-        }
-    }, [category]);
+type Items = {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+};
 
-    useEffect(() => {
-        const fetchItems = async () => {
-            const response = await fetch(categoryDetails.url)
-                .then(res => res.json())
-            setItems(response);
-        }
-        fetchItems();
-    }, [categoryDetails]);
+export default function Clothing({ category }: IProps) {
+  const [items, setItems] = useState<Items[] | null>(null);
+  const [categoryDetails, setCategoryDetails] =
+    useState<ICategoryDetails | null>(null);
 
-    return (
-        <div>
-            <h2>{categoryDetails.category}</h2>
-            <div className="clothingContainer">
-                {items.map((item) => (
-                    <Card key={item.id} data={item} type={categoryDetails.id} />
-                ))}
-            </div>
-        </div>
-    )
+  useEffect(() => {
+    if (category === "women") {
+      setCategoryDetails({
+        id: 1,
+        category: "Women's Clothing",
+        url: "https://fakestoreapi.com/products/category/women's clothing",
+      });
+    } else if (category === "men") {
+      setCategoryDetails({
+        id: 2,
+        category: "Men's Clothing",
+        url: "https://fakestoreapi.com/products/category/men's clothing",
+      });
+    }
+  }, [category]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      if (categoryDetails?.url) {
+        const response: Items[] = await fetch(categoryDetails?.url).then(
+          (res) => res.json()
+        );
+        setItems(response);
+      }
+    };
+    // const fetchItems = async () => {
+    //     const res = await axios.get(categoryDetails?.url);
+    //     console.log(res.data);
+    //     setItems(res.data);
+    // }
+    fetchItems();
+  }, [categoryDetails]);
+
+  return (
+    <div>
+      <h2>{categoryDetails?.category}</h2>
+      <div className="clothingContainer">
+        {items?.map((item: Items) => (
+          <Card key={item.id} data={item} type={categoryDetails?.id} />
+        ))}
+      </div>
+    </div>
+  );
 }
