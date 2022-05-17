@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+//import axios from "axios";
 import "./clothing.css";
 import Card from "../card/Card";
-import { Items } from "../card/Card";
+//import Card from "@components/card/Card";
+import { Items } from "@typesData/TypesData";
 
 interface IProps {
   category: string;
