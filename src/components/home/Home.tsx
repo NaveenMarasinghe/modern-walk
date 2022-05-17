@@ -10,7 +10,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const res = await axios.get("https://fakestoreapi.com/products?limit=4");
+      const res = await axios.get("http://localhost:5000/clothing");
       console.log(res.data);
       setItems(res.data);
     };

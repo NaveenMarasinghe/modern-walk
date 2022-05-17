@@ -25,13 +25,13 @@ export default function Clothing({ category }: IProps) {
       setCategoryDetails({
         id: 1,
         category: "Women's Clothing",
-        url: "https://fakestoreapi.com/products/category/women's clothing",
+        url: "http://localhost:5000/women",
       });
     } else if (category === "men") {
       setCategoryDetails({
         id: 2,
         category: "Men's Clothing",
-        url: "https://fakestoreapi.com/products/category/men's clothing",
+        url: "http://localhost:5000/men",
       });
     }
   }, [category]);

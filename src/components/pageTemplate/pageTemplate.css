@@ -3,11 +3,28 @@
 }
 
 .header {
+    text-align: center; 
+    display: flex;
+}
+
+.header-center{
+    flex:10;
     font-size: 48px;
     font-weight: bold;
     margin: 10px 10px;
-    text-align: center;
     color: black;
+    text-align: center;
+}
+
+.header-left{
+    flex:1
+}
+
+.header-right{
+    flex:1;
+    font-size: x-large;
+    text-align: center;
+    margin: auto 0px;
 }
 
 .hr {
