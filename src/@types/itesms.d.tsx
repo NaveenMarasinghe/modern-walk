@@ -10,3 +10,9 @@ export type Items = {
     count: number;
   };
 };
+
+export interface ICategoryDetails {
+  id: number;
+  url?: string;
+  category?: string;
+}

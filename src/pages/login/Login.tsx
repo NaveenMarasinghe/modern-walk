@@ -10,12 +10,20 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { UserContextType } from "../../@types/user.d";
+import useUser from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 export default function Login() {
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
+  const [redirect, setRedirect] = React.useState<boolean>(false);
+
+  let navigate = useNavigate();
+
+  const { loginUser, user } = useUser();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,9 +37,17 @@ export default function Login() {
     );
     const data = await res.json();
     if (data[0]) {
+      loginUser({ name: data[0].name, email: data[0].email });
+      setRedirect(true);
       alert("Correct email and password");
     } else alert("Incorrect email or password");
   };
+
+  React.useEffect(() => {
+    if (redirect) {
+      navigate("/");
+    }
+  }, [redirect]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -43,7 +59,7 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            // backgroundImage: "url(https://source.unsplash.com/random)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -67,7 +83,7 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign In
+              {user?.name}
             </Typography>
             <Box
               component="form"

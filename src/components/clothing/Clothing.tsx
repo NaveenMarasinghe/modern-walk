@@ -3,16 +3,10 @@ import { useEffect, useState } from "react";
 import "./clothing.css";
 import Card from "../card/Card";
 //import Card from "@components/card/Card";
-import { Items } from "src/@types/itesms.d";
+import { Items, ICategoryDetails } from "src/@types/itesms.d";
 
 interface IProps {
   category: string;
-}
-
-interface ICategoryDetails {
-  id: number;
-  url?: string;
-  category?: string;
 }
 
 export default function Clothing({ category }: IProps) {

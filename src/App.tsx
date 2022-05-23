@@ -5,18 +5,21 @@ import MensClothing from "./pages/mensClothing/MensClothing";
 import WomensClothing from "./pages/womensClothing/WomensClothing";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
+import { UserProvider } from "./context/userContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/mens-clothing" element={<MensClothing />} />
-        <Route path="/womens-clothing" element={<WomensClothing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/mens-clothing" element={<MensClothing />} />
+          <Route path="/womens-clothing" element={<WomensClothing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 
