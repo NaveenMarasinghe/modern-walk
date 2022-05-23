@@ -1,5 +1,5 @@
 import "./card.css";
-import { Items } from "@typesData/TypesData";
+import { Items } from "src/@types/itesms.d";
 
 export type Props = {
   data: Items;

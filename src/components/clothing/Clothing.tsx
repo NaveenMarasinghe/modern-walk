@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./clothing.css";
 import Card from "../card/Card";
 //import Card from "@components/card/Card";
-import { Items } from "@typesData/TypesData";
+import { Items } from "src/@types/itesms.d";
 
 interface IProps {
   category: string;
