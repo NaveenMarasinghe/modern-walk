@@ -8,7 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ShoppingCart from "../shoppingCart/ShoppingCart";
-import useUser from "../../context/userContext";
+import { useUser } from "../../context/userContext";
 import { UserContextType } from "../../@types/user.d";
 
 interface Props {
@@ -18,17 +18,32 @@ interface Props {
 export default function PageTemplate({ component }: Props) {
   const [open, setOpen] = React.useState(false);
 
-  const { loginUser, user } = useUser();
+  const { logoutUser, user } = useUser();
 
   const handleClickOpen = () => {
     setOpen(true);
+  };
+
+  const handleLogout = () => {
+    logoutUser({ name: "", email: "" });
   };
 
   return (
     <div className="homeContainer">
       <ShoppingCart setOpen={setOpen} open={open} />
       <div className="header">
-        <div className="header-left">{user?.name && "Hi " + user?.name}</div>
+        <div className="header-left">
+          {user?.name ? (
+            <div className="header-left-items">
+              <div className="header-profile">Hi {user?.name}</div>
+              <div className="header-logout" onClick={handleLogout}>
+                Logout
+              </div>
+            </div>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
+        </div>
         <div className="header-center">
           <Link to="/" style={{ textDecoration: "none" }}>
             <div className="header-center">Modern Walk</div>

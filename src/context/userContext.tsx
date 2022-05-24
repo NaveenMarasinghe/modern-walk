@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { User, UserContextType } from "../@types/user.d";
 
-export const UserContext = React.createContext<UserContextType>(
-  {} as UserContextType
+export const UserContext = React.createContext<UserContextType | undefined>(
+  undefined
 );
 
 type Props = {
@@ -11,8 +11,8 @@ type Props = {
 
 const initialUser: User = { name: "initial", email: "" };
 
-export function UserProvider({ children }: Props) {
-  const [user, setUser] = React.useState<User>();
+const UserProvider = ({ children }: Props) => {
+  const [user, setUser] = React.useState<User | undefined>();
   const loginUser = (user: User) => {
     const newUser: User = {
       name: user.name,
@@ -21,7 +21,7 @@ export function UserProvider({ children }: Props) {
     setUser(newUser);
   };
   const logoutUser = (user: User) => {
-    setUser(initialUser);
+    setUser(undefined);
   };
 
   const memoedValue = React.useMemo(
@@ -35,8 +35,14 @@ export function UserProvider({ children }: Props) {
   return (
     <UserContext.Provider value={memoedValue}>{children}</UserContext.Provider>
   );
-}
+};
 
-export default function useUser() {
-  return useContext(UserContext);
-}
+const useUser = () => {
+  const context = React.useContext(UserContext);
+  if (context === undefined) {
+    throw new Error("useUser can only be used inside UserProvider");
+  }
+  return context;
+};
+
+export { UserProvider, useUser };

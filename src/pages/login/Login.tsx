@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { UserContextType } from "../../@types/user.d";
-import useUser from "../../context/userContext";
+import { useUser } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
