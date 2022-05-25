@@ -1,5 +1,5 @@
-import PageTemplate from "../../components/pageTemplate/PageTemplate";
-import Clothing from "../../components/clothing/Clothing";
+import PageTemplate from "../../sections/pageTemplate/PageTemplate";
+import Clothing from "../../sections/clothing/Clothing";
 
 export default function WomensClothing() {
   return <PageTemplate component={<Clothing category="women" />} />;

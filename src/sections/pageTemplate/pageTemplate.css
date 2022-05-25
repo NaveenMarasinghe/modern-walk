@@ -11,7 +11,7 @@
     flex:10;
     font-size: 48px;
     font-weight: bold;
-    margin: 10px 10px;
+    margin: 0px 10px;
     color: black;
     text-align: center;
 }
@@ -22,14 +22,27 @@
     margin: auto 0px;
 }
 
+.header-left-items{
+    position: relative;
+    display: inline-block;
+}
+
 .header-logout{
     display: none;
+    position: absolute;
 }
 
 .header-left:hover .header-logout{   
+    background-color: #f1f1f1;
     display: block;
     cursor: pointer;
+    padding: 5px;
+}
 
+.header-left:hover .header-profile{
+    background-color: #D9D9D9;
+    border-radius: 4px;
+    padding: 5px;
 }
 
 .header-right{

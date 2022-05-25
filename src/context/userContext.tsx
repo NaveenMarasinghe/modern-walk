@@ -9,8 +9,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-const initialUser: User = { name: "initial", email: "" };
-
 const UserProvider = ({ children }: Props) => {
   const [user, setUser] = React.useState<User | undefined>();
   const loginUser = (user: User) => {

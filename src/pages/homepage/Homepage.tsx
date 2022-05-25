@@ -1,10 +1,7 @@
 import "./homepage.css";
-import PageTemplate from "../../components/pageTemplate/PageTemplate";
-import Home from "../../components/home/Home";
-
+import PageTemplate from "../../sections/pageTemplate/PageTemplate";
+import Home from "../../sections/home/Home";
 
 export default function Homepage() {
-    return (
-        <PageTemplate component={<Home />} />
-    )
+  return <PageTemplate component={<Home />} />;
 }

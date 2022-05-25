@@ -7,7 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import ShoppingCart from "../shoppingCart/ShoppingCart";
+import ShoppingCart from "../../components/shoppingCart/ShoppingCart";
 import { useUser } from "../../context/userContext";
 import { UserContextType } from "../../@types/user.d";
 
