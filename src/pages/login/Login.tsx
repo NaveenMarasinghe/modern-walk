@@ -10,9 +10,10 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { UserContextType } from "../../@types/user.d";
+import { User, UserContextType } from "../../@types/user.d";
 import { useUser } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
+import { UserAPI } from "../../services/user.services";
 
 const theme = createTheme();
 
@@ -27,15 +28,15 @@ export default function Login() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    //const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
-    const res = await fetch(
-      "http://localhost:5000/users?email=" + email + "&password=" + password
-    );
-    const data = await res.json();
+    const data = await UserAPI.login(email, password)
+      .then(function (response: User) {
+        console.log(response);
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error);
+        return error;
+      });
     if (data[0]) {
       loginUser({ name: data[0].name, email: data[0].email });
       setRedirect(true);

@@ -179,6 +179,12 @@
       "email": "naveen@gmail.com",
       "password": "1",
       "id": 1
+    },
+    {
+      "name": "Mare",
+      "email": "mare@gmail.com",
+      "password": "1",
+      "id": 2
     }
   ]
 }

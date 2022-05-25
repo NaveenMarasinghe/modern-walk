@@ -10,6 +10,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { UserAPI } from "src/services/user.services";
 
 const theme = createTheme();
 
@@ -25,16 +26,23 @@ export default function Login() {
   const [password, setPassword] = React.useState<string>("");
   const [repeatPassword, setRepeatPassword] = React.useState<string>("");
 
-  const validateEmail = async (email: string): Promise<boolean> => {
-    const res = await fetch("http://localhost:5000/users?email=" + email);
-    const data = await res.json();
-    if (!data[0]) {
-      return true;
-    } else {
-      alert("Email already exists");
-      return false;
-    }
-  };
+  // const validateEmail = async (email: string): Promise<boolean> => {
+  //   const res: UserData = await UserAPI.email(email)
+  //     .then(function (response) {
+  //       console.log(response);
+  //       alert("Successfully singed up.");
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  //   // const data = await res.json();
+  //   if (!res[0]) {
+  //     return true;
+  //   } else {
+  //     alert("Email already exists");
+  //     return false;
+  //   }
+  // };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,13 +53,14 @@ export default function Login() {
       password: password,
     };
     if (password === repeatPassword) {
-      const res = await fetch("http://localhost:5000/users", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      await UserAPI.signup(userData)
+        .then(function (response) {
+          console.log(response);
+          alert("Successfully singed up.");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     } else {
       alert("Password does not match");
     }

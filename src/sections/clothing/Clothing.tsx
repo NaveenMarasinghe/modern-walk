@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-//import axios from "axios";
 import "./clothing.css";
-import Card from "../card/Card";
-//import Card from "@components/card/Card";
-import { Items, ICategoryDetails } from "src/@types/itesms.d";
+import Card from "../../components/card/Card";
+import { Items, ICategoryDetails } from "@typesData/items.d";
+import { ProductAPI } from "../../services/product.services";
 
 interface IProps {
   category: string;
@@ -18,14 +17,14 @@ export default function Clothing({ category }: IProps) {
     if (category === "women") {
       setCategoryDetails({
         id: 1,
-        category: "Women's Clothing",
-        url: "http://localhost:5000/women",
+        categoryTitle: "Women's Clothing",
+        url: "women",
       });
     } else if (category === "men") {
       setCategoryDetails({
         id: 2,
-        category: "Men's Clothing",
-        url: "http://localhost:5000/men",
+        categoryTitle: "Men's Clothing",
+        url: "men",
       });
     }
   }, [category]);
@@ -33,23 +32,23 @@ export default function Clothing({ category }: IProps) {
   useEffect(() => {
     const fetchItems = async () => {
       if (categoryDetails?.url) {
-        const response: Items[] = await fetch(categoryDetails?.url).then(
-          (res) => res.json()
-        );
-        setItems(response);
+        await ProductAPI.getClothing(categoryDetails?.url)
+          .then(function (response: Items[]) {
+            setItems(response);
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       }
     };
-    // const fetchItems = async () => {
-    //     const res = await axios.get(categoryDetails?.url);
-    //     console.log(res.data);
-    //     setItems(res.data);
-    // }
+
     fetchItems();
   }, [categoryDetails]);
 
   return (
     <div>
-      <h2>{categoryDetails?.category}</h2>
+      <h2>{categoryDetails?.categoryTitle}</h2>
       <div className="clothingContainer">
         {items?.map((item: Items) => (
           <Card key={item.id} data={item} type={categoryDetails?.id} />

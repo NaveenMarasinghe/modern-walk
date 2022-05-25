@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import "./home.css";
-import Card from "../card/Card";
+import Card from "../../components/card/Card";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Items } from "src/@types/itesms.d";
+import { Items } from "@typesData/items.d";
+import { ProductAPI } from "../../services/product.services";
 
 const Home: React.FC = () => {
   const [items, setItems] = useState<Items[]>([]);
 
   useEffect(() => {
     const fetchItems = async () => {
-      const res = await axios.get("http://localhost:5000/clothing");
-      console.log(res.data);
-      setItems(res.data);
+      await ProductAPI.getClothing("clothing")
+        .then(function (response: Items[]) {
+          setItems(response);
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     };
     fetchItems();
   }, []);

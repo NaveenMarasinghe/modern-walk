@@ -14,5 +14,5 @@ export type Items = {
 export interface ICategoryDetails {
   id: number;
   url?: string;
-  category?: string;
+  categoryTitle?: string;
 }
