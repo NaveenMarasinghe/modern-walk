@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import "./clothing.css";
 import Card from "../../components/card/Card";
-import { Items, ICategoryDetails } from "@typesData/items.d";
+import { Items, CategoryDetails } from "@typesData/items";
 import { ProductAPI } from "../../services/product.services";
 
-interface IProps {
+type Props = {
   category: string;
-}
+};
 
-export default function Clothing({ category }: IProps) {
+export default function Clothing({ category }: Props) {
   const [items, setItems] = useState<Items[] | null>(null);
   const [categoryDetails, setCategoryDetails] =
-    useState<ICategoryDetails | null>(null);
+    useState<CategoryDetails | null>(null);
 
   useEffect(() => {
     if (category === "women") {
@@ -32,17 +32,17 @@ export default function Clothing({ category }: IProps) {
   useEffect(() => {
     const fetchItems = async () => {
       if (categoryDetails?.url) {
-        await ProductAPI.getClothing(categoryDetails?.url)
-          .then(function (response: Items[]) {
-            setItems(response);
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        const response: any = await ProductAPI.getClothing(
+          categoryDetails?.url
+        );
+        if (response.data) {
+          console.log(response.data);
+          setItems(response.data);
+        } else if (response.error) {
+          console.log(response.error);
+        }
       }
     };
-
     fetchItems();
   }, [categoryDetails]);
 

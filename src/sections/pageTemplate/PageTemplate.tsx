@@ -2,18 +2,12 @@ import * as React from "react";
 import "./pageTemplate.css";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import ShoppingCart from "../../components/shoppingCart/ShoppingCart";
 import { useUser } from "../../context/userContext";
-import { UserContextType } from "../../@types/user.d";
 
-interface Props {
+type Props = {
   component: React.ReactNode;
-}
+};
 
 export default function PageTemplate({ component }: Props) {
   const [open, setOpen] = React.useState(false);
@@ -25,7 +19,7 @@ export default function PageTemplate({ component }: Props) {
   };
 
   const handleLogout = () => {
-    logoutUser({ name: "", email: "" });
+    logoutUser();
   };
 
   return (

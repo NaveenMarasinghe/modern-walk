@@ -1,16 +1,15 @@
 import React from "react";
-import { User, UserContextType } from "../@types/user.d";
+import { User } from "../types/user";
+import { UserCTXType } from "../types/contextTypes/userContext";
 
-export const UserContext = React.createContext<UserContextType | undefined>(
-  undefined
-);
+export const UserContext = React.createContext<UserCTXType | null>(null);
 
 type Props = {
   children: React.ReactNode;
 };
 
 const UserProvider = ({ children }: Props) => {
-  const [user, setUser] = React.useState<User | undefined>();
+  const [user, setUser] = React.useState<User | null>(null);
   const loginUser = (user: User) => {
     const newUser: User = {
       name: user.name,
@@ -18,8 +17,8 @@ const UserProvider = ({ children }: Props) => {
     };
     setUser(newUser);
   };
-  const logoutUser = (user: User) => {
-    setUser(undefined);
+  const logoutUser = () => {
+    setUser(null);
   };
 
   const memoedValue = React.useMemo(
@@ -37,7 +36,7 @@ const UserProvider = ({ children }: Props) => {
 
 const useUser = () => {
   const context = React.useContext(UserContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useUser can only be used inside UserProvider");
   }
   return context;

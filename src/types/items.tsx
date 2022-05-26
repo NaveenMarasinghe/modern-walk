@@ -11,8 +11,8 @@ export type Items = {
   };
 };
 
-export interface ICategoryDetails {
+export type CategoryDetails = {
   id: number;
   url?: string;
   categoryTitle?: string;
-}
+};

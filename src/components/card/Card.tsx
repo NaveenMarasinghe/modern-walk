@@ -1,7 +1,7 @@
 import "./card.css";
-import { Items } from "@typesData/items.d";
+import { Items } from "@typesData/items";
 
-export type Props = {
+type Props = {
   data: Items;
   type?: number;
 };

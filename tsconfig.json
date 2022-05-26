@@ -22,7 +22,7 @@
         "baseUrl": ".",
         "paths": {
             "@components/*": ["src/components/*"],
-            "@typesData/*": ["src/@types/*"]
+            "@typesData/*": ["src/types/*"]
         }
     },
     "include": [

@@ -53,14 +53,12 @@ export default function Login() {
       password: password,
     };
     if (password === repeatPassword) {
-      await UserAPI.signup(userData)
-        .then(function (response) {
-          console.log(response);
-          alert("Successfully singed up.");
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      const response: any = await UserAPI.signup(userData);
+      if (response.data) {
+        alert("New account created");
+      } else if (response.error) {
+        console.log(response.error);
+      }
     } else {
       alert("Password does not match");
     }

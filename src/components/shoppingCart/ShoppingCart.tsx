@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ShoppingCartTable from "../shoppingCartTable/ShoppingCartTable";
 
-export type Props = {
+type Props = {
   setOpen: Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
 };

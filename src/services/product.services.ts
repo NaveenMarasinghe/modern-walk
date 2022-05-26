@@ -1,15 +1,21 @@
-import axios from "axios"
+import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5000'
+  baseURL: "http://localhost:5000",
 });
 
-export const ProductAPI = {
-    getClothing: async function(category:string) {
-        const res = await axiosInstance.request({
-            method: "GET",
-            url: `/${category}`
-        });
-        return res.data
-    },
+async function getClothing(category: string) {
+  try {
+    const res = await axiosInstance.request({
+      method: "GET",
+      url: `/${category}`,
+    });
+    return res;
+  } catch (err) {
+    return err;
+  }
 }
+
+export const ProductAPI = {
+  getClothing: getClothing,
+};

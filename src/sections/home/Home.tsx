@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import "./home.css";
 import Card from "../../components/card/Card";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { Items } from "@typesData/items.d";
+import { Items } from "@typesData/items";
 import { ProductAPI } from "../../services/product.services";
 
 const Home: React.FC = () => {
@@ -11,14 +10,13 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      await ProductAPI.getClothing("clothing")
-        .then(function (response: Items[]) {
-          setItems(response);
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      const response: any = await ProductAPI.getClothing("clothing");
+      if (response.data) {
+        setItems(response.data);
+        console.log(response.data);
+      } else if (response.error) {
+        console.log(response.error);
+      }
     };
     fetchItems();
   }, []);

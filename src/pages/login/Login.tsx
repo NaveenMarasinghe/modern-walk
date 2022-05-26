@@ -10,7 +10,6 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { User, UserContextType } from "../../@types/user.d";
 import { useUser } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 import { UserAPI } from "../../services/user.services";
@@ -28,17 +27,10 @@ export default function Login() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = await UserAPI.login(email, password)
-      .then(function (response: User) {
-        console.log(response);
-        return response;
-      })
-      .catch(function (error) {
-        console.log(error);
-        return error;
-      });
-    if (data[0]) {
-      loginUser({ name: data[0].name, email: data[0].email });
+    const response: any = await UserAPI.login(email, password);
+    console.log(response.data);
+    if (response.data) {
+      loginUser({ name: response.data[0].name, email: response.data[0].email });
       setRedirect(true);
       alert("Correct email and password");
     } else alert("Incorrect email or password");
