@@ -1,15 +1,21 @@
 import React from "react";
 import { User } from "../types/user";
-import { UserCTXType } from "../types/contextTypes/userContext";
-
-export const UserContext = React.createContext<UserCTXType | null>(null);
 
 type Props = {
   children: React.ReactNode;
 };
 
+type UserCTXType = {
+  user: User | null;
+  loginUser: (user: User) => void;
+  logoutUser: () => void;
+};
+
+export const UserContext = React.createContext<UserCTXType | null>(null);
+
 const UserProvider = ({ children }: Props) => {
   const [user, setUser] = React.useState<User | null>(null);
+
   const loginUser = (user: User) => {
     const newUser: User = {
       name: user.name,
@@ -17,6 +23,7 @@ const UserProvider = ({ children }: Props) => {
     };
     setUser(newUser);
   };
+
   const logoutUser = () => {
     setUser(null);
   };

@@ -8,7 +8,7 @@
 }
 
 .header-center{
-    flex:10;
+    flex:4;
     font-size: 48px;
     font-weight: bold;
     margin: 0px 10px;
@@ -17,27 +17,40 @@
 }
 
 .header-left{
-    flex:1;
+    flex:4;
     font-size:large;
     margin: auto 0px;
 }
 
-.header-left-items{
+.header-right{
+    display: flex;    
+    justify-content: end;
+}
+
+.header-right-button{
+    margin-right: 20px;
+}
+
+.header-right-items{
     position: relative;
-    display: inline-block;
+    display: flex;    
+    justify-content: end;
 }
 
-.header-logout{
+.header-profile{
+    margin: 0 10px;
+}
+
+/* .header-logout{
     display: none;
-    position: absolute;
-}
+} */
 
-.header-left:hover .header-logout{   
+/* .header-profile:hover + .header-logout{   
     background-color: #f1f1f1;
     display: block;
-    cursor: pointer;
     padding: 5px;
-}
+    position: absolute;
+} */
 
 .header-left:hover .header-profile{
     background-color: #D9D9D9;
@@ -46,7 +59,7 @@
 }
 
 .header-right{
-    flex:1;
+    flex:4;
     font-size: x-large;
     text-align: center;
     margin: auto 0px;

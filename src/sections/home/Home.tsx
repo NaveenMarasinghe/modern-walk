@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Items } from "@typesData/items";
 import { ProductAPI } from "../../services/product.services";
 
-const Home: React.FC = () => {
+export default function Home() {
   const [items, setItems] = useState<Items[]>([]);
 
   useEffect(() => {
@@ -42,6 +42,4 @@ const Home: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Home;
+}
