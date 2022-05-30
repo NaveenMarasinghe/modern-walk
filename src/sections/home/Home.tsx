@@ -4,6 +4,7 @@ import Card from "../../components/card/Card";
 import { Link } from "react-router-dom";
 import { Items } from "@typesData/items";
 import { ProductAPI } from "../../services/product.services";
+import { handleError } from "../../services/errorHandle.services";
 
 export default function Home() {
   const [items, setItems] = useState<Items[]>([]);
@@ -11,11 +12,11 @@ export default function Home() {
   useEffect(() => {
     const fetchItems = async () => {
       const response: any = await ProductAPI.getClothing("clothing");
-      if (response.data) {
-        setItems(response.data);
+      if (!response.error) {
         console.log(response.data);
-      } else if (response.error) {
-        console.log(response.error);
+        setItems(response.data);
+      } else {
+        handleError(response.error);
       }
     };
     fetchItems();

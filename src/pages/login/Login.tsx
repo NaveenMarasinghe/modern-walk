@@ -27,7 +27,6 @@ export default function Login() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const response: any = await UserAPI.login(email, password);
-    console.log(response.data);
     if (response.data) {
       loginUser({ name: response.data[0].name, email: response.data[0].email });
       setRedirect(true);

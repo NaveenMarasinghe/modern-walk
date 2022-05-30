@@ -3,6 +3,7 @@ import "./clothing.css";
 import Card from "../../components/card/Card";
 import { Items, CategoryDetails } from "@typesData/items";
 import { ProductAPI } from "../../services/product.services";
+import { handleError } from "../../services/errorHandle.services";
 
 type Props = {
   category: string;
@@ -35,11 +36,9 @@ export default function Clothing({ category }: Props) {
         const response: any = await ProductAPI.getClothing(
           categoryDetails?.url
         );
-        if (response.data) {
+        if (!response.error) {
           console.log(response.data);
           setItems(response.data);
-        } else if (response.error) {
-          console.log(response.error);
         }
       }
     };
