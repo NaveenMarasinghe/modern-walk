@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import ShoppingCart from "../../components/shoppingCart/ShoppingCart";
 import { useUser } from "../../context/userContext";
+import { useApp } from "../../context/appContext";
+import SnackBar from "../../components/snackBar/SnackBar";
 
 type Props = {
   children: React.ReactNode;
@@ -20,7 +22,10 @@ export default function PageTemplate({ children }: Props) {
 
   const handleLogout = () => {
     logoutUser();
+    openAlert("Logged out successfully");
   };
+
+  const { alertMessage, openAlert } = useApp();
 
   return (
     <div className="homeContainer">
@@ -59,6 +64,7 @@ export default function PageTemplate({ children }: Props) {
       <div className="homeContent">
         <div className="content">{children}</div>
       </div>
+      <SnackBar alert={alertMessage} />
     </div>
   );
 }

@@ -12,11 +12,11 @@ export default function Home() {
   useEffect(() => {
     const fetchItems = async () => {
       const response: any = await ProductAPI.getClothing("clothing");
-      if (!response.error) {
-        console.log(response.data);
+      if (response.data) {
+        console.log(response);
         setItems(response.data);
       } else {
-        handleError(response.error);
+        handleError(response);
       }
     };
     fetchItems();
@@ -26,7 +26,7 @@ export default function Home() {
     <div className="homeContainer">
       <h2>Flash sale</h2>
       <div className="homeFlashSaleItems">
-        {items.map((item) => (
+        {items?.map((item) => (
           <Card key={item.id} data={item} />
         ))}
       </div>

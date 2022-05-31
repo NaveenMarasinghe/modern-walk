@@ -11,9 +11,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useUser } from "../../context/userContext";
+import { useApp } from "../../context/appContext";
 import { useNavigate } from "react-router-dom";
 import { UserAPI } from "../../services/user.services";
 import PageTemplate from "../../sections/pageTemplate/PageTemplate";
+import SnackBar from "../../components/snackBar/SnackBar";
 
 const theme = createTheme();
 
@@ -23,14 +25,15 @@ export default function Login() {
   const [redirect, setRedirect] = React.useState<boolean>(false);
 
   const { loginUser, user } = useUser();
+  const { alertMessage, openAlert } = useApp();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const response: any = await UserAPI.login(email, password);
     if (response.data) {
       loginUser({ name: response.data[0].name, email: response.data[0].email });
+      openAlert("Login Successful");
       setRedirect(true);
-      alert("Correct email and password");
     } else alert("Incorrect email or password");
   };
 

@@ -39,6 +39,8 @@ export default function Clothing({ category }: Props) {
         if (!response.error) {
           console.log(response.data);
           setItems(response.data);
+        } else {
+          handleError(response.error);
         }
       }
     };
