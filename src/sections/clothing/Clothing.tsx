@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "./clothing.css";
 import Card from "../../components/card/Card";
 import { Items, CategoryDetails } from "@typesData/items";
 import { ProductAPI } from "../../services/product.services";
 import { handleError } from "../../services/errorHandle.services";
+import { useQuery } from "react-query";
+import { axiosInstance } from "../../services/api.services";
 
 type Props = {
   category: string;
 };
 
 export default function Clothing({ category }: Props) {
-  const [items, setItems] = useState<Items[] | null>(null);
   const [categoryDetails, setCategoryDetails] =
     useState<CategoryDetails | null>(null);
 
@@ -30,28 +31,33 @@ export default function Clothing({ category }: Props) {
     }
   }, [category]);
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      if (categoryDetails?.url) {
-        const response: any = await ProductAPI.getClothing(
-          categoryDetails?.url
-        );
-        if (!response.error) {
-          console.log(response.data);
-          setItems(response.data);
-        } else {
-          handleError(response.error);
-        }
-      }
-    };
-    fetchItems();
-  }, [categoryDetails]);
+  const { isLoading, data } = useQuery("clothing", async () => {
+    const { data } = await axiosInstance.get(`/${category}`);
+    return data;
+  });
+
+  // const { status, data } = useQuery("clothing", ProductAPI.clothing(category));
+
+  // useEffect(() => {
+  //   if (categoryDetails?.url) {
+  //     const query = useQuery("clothing", async () => {
+  //       const { data } = await axiosInstance.get(`/${category}`);
+  //       return data;
+  //     });
+  //     console.log(query);
+  //     // const { status, data, error, isFetching } = ProductAPI.useGetClothing(
+  //     //   categoryDetails.url
+  //     // );
+  //     // console.log(data);
+  //   }
+  // }, [categoryDetails]);
 
   return (
     <div>
       <h2>{categoryDetails?.categoryTitle}</h2>
       <div className="clothingContainer">
-        {items?.map((item: Items) => (
+        {isLoading && <div>Loading...</div>}
+        {data?.map((item: Items) => (
           <Card key={item.id} data={item} type={categoryDetails?.id} />
         ))}
       </div>

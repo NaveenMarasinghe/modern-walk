@@ -5,28 +5,21 @@ import { Link } from "react-router-dom";
 import { Items } from "@typesData/items";
 import { ProductAPI } from "../../services/product.services";
 import { handleError } from "../../services/errorHandle.services";
+import { useQuery } from "react-query";
+import { axiosInstance } from "../../services/api.services";
 
 export default function Home() {
-  const [items, setItems] = useState<Items[]>([]);
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      const response: any = await ProductAPI.getClothing("clothing");
-      if (response.data) {
-        console.log(response);
-        setItems(response.data);
-      } else {
-        handleError(response);
-      }
-    };
-    fetchItems();
-  }, []);
+  const { isLoading, data } = useQuery("clothing", async () => {
+    const { data } = await axiosInstance.get("clothing");
+    return data;
+  });
 
   return (
     <div className="homeContainer">
       <h2>Flash sale</h2>
       <div className="homeFlashSaleItems">
-        {items?.map((item) => (
+        {isLoading && <div>Loading...</div>}
+        {data?.map((item: any) => (
           <Card key={item.id} data={item} />
         ))}
       </div>
