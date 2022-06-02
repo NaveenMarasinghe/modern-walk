@@ -1,5 +1,4 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { useApp } from "../../context/appContext";
@@ -28,10 +27,6 @@ export default function SnackBar({ alert }: Props) {
     horizontal: "center",
   });
   const { vertical, horizontal } = state;
-
-  const handleClick = (newState: SnackbarOrigin) => () => {
-    setState({ open: true, ...newState });
-  };
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
