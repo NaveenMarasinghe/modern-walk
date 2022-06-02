@@ -24,7 +24,7 @@
 
 .header-right{
     display: flex;    
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .header-right-button{
@@ -34,7 +34,7 @@
 .header-right-items{
     position: relative;
     display: flex;    
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .header-profile{

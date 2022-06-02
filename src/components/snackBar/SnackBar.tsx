@@ -21,12 +21,12 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 export default function SnackBar({ alert }: Props) {
   const { alertMessage, closeAlert } = useApp();
 
-  const [state, setState] = React.useState<State>({
+  const [state] = React.useState<State>({
     open: false,
     vertical: "top",
     horizontal: "center",
   });
-  const { vertical, horizontal, open } = state;
+  const { vertical, horizontal } = state;
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,

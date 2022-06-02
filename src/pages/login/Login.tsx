@@ -12,7 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useUser } from "../../context/userContext";
 import { useApp } from "../../context/appContext";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { UserAPI } from "../../services/user.services";
 import PageTemplate from "../../sections/pageTemplate/PageTemplate";
 
@@ -36,14 +36,9 @@ export default function Login() {
     } else alert("Incorrect email or password");
   };
 
-  let navigate = useNavigate();
-
-  if (redirect) {
-    navigate("/");
-  }
-
   return (
     <PageTemplate>
+      {redirect && <Navigate replace to="/" />}
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
