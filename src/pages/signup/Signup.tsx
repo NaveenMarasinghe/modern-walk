@@ -1,19 +1,11 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { UserAPI } from "src/services/user.services";
-import { useNavigate } from "react-router-dom";
-
-const theme = createTheme();
+import { Navigate } from "react-router-dom";
+import PageTemplate from "../../sections/pageTemplate/PageTemplate";
+import "./signup.css";
 
 type UserData = {
   name: string;
@@ -28,8 +20,7 @@ export default function Login() {
   const [repeatPassword, setRepeatPassword] = React.useState<string>("");
   const [redirect, setRedirect] = React.useState<boolean>(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     const userData: UserData = {
       name: name,
       email: email,
@@ -48,36 +39,13 @@ export default function Login() {
     }
   };
 
-  let navigate = useNavigate();
-
-  if (redirect) {
-    navigate("/login");
-  }
-
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+    <PageTemplate>
+      {redirect && <Navigate replace to="/login" />}
+      <div className="signupContainer">
+        <div className="signupBox">
+          <div className="signupTitle">Sign up</div>
+          <div className="signupTextRow">
             <TextField
               margin="normal"
               required
@@ -89,6 +57,8 @@ export default function Login() {
               autoFocus
               onChange={(e) => setName(e.target.value)}
             />
+          </div>
+          <div className="signupTextRow">
             <TextField
               margin="normal"
               required
@@ -99,6 +69,8 @@ export default function Login() {
               autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
             />
+          </div>
+          <div className="signupTextRow">
             <TextField
               margin="normal"
               required
@@ -110,6 +82,8 @@ export default function Login() {
               autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
+          </div>
+          <div className="signupTextRow">
             <TextField
               margin="normal"
               required
@@ -121,25 +95,25 @@ export default function Login() {
               autoComplete="repeat-password"
               onChange={(e) => setRepeatPassword(e.target.value)}
             />
+          </div>
+          <div className="signupButtonRow">
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleSubmit}
             >
               Sign up
             </Button>
-            <Grid container>
-              <Grid item xs></Grid>
-              <Grid item>
-                <Link href="/login" variant="body2">
-                  {"Already have an account? Log in"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+          </div>
+          <div className="signupSignupRow">
+            <Link href="/login" variant="body2">
+              {"Already have an account? Log in"}
+            </Link>
+          </div>
+        </div>
+      </div>
+    </PageTemplate>
   );
 }
