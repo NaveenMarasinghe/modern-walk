@@ -13,7 +13,7 @@ type UserData = {
   password: string;
 };
 
-export default function Login() {
+export default function Signup() {
   const [email, setEmail] = React.useState<string>("");
   const [name, setName] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
