@@ -28,10 +28,6 @@ export default function SnackBar({ alert }: Props) {
   });
   const { vertical, horizontal, open } = state;
 
-  const handleClick = (newState: SnackbarOrigin) => () => {
-    setState({ open: true, ...newState });
-  };
-
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
