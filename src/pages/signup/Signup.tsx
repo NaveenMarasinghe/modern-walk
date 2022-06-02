@@ -28,27 +28,8 @@ export default function Login() {
   const [repeatPassword, setRepeatPassword] = React.useState<string>("");
   const [redirect, setRedirect] = React.useState<boolean>(false);
 
-  // const validateEmail = async (email: string): Promise<boolean> => {
-  //   const res: UserData = await UserAPI.email(email)
-  //     .then(function (response) {
-  //       console.log(response);
-  //       alert("Successfully singed up.");
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  //   // const data = await res.json();
-  //   if (!res[0]) {
-  //     return true;
-  //   } else {
-  //     alert("Email already exists");
-  //     return false;
-  //   }
-  // };
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     const userData: UserData = {
       name: name,
       email: email,
