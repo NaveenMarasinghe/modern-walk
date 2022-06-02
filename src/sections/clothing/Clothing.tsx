@@ -1,9 +1,7 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import "./clothing.css";
 import Card from "../../components/card/Card";
 import { Items, CategoryDetails } from "@typesData/items";
-import { ProductAPI } from "../../services/product.services";
-import { handleError } from "../../services/errorHandle.services";
 import { useQuery } from "react-query";
 import { axiosInstance } from "../../services/api.services";
 
