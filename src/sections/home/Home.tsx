@@ -1,10 +1,6 @@
-import { useEffect, useState } from "react";
 import "./home.css";
 import Card from "../../components/card/Card";
 import { Link } from "react-router-dom";
-import { Items } from "@typesData/items";
-import { ProductAPI } from "../../services/product.services";
-import { handleError } from "../../services/errorHandle.services";
 import { useQuery } from "react-query";
 import { axiosInstance } from "../../services/api.services";
 

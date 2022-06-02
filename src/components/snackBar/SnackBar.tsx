@@ -1,5 +1,4 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { useApp } from "../../context/appContext";
@@ -29,69 +28,12 @@ export default function SnackBar({ alert }: Props) {
   });
   const { vertical, horizontal, open } = state;
 
-  const handleClick = (newState: SnackbarOrigin) => () => {
-    setState({ open: true, ...newState });
-  };
-
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
     closeAlert();
   };
-
-  const buttons = (
-    <React.Fragment>
-      <Button
-        onClick={handleClick({
-          vertical: "top",
-          horizontal: "center",
-        })}
-      >
-        Top-Center
-      </Button>
-      <Button
-        onClick={handleClick({
-          vertical: "top",
-          horizontal: "right",
-        })}
-      >
-        Top-Right
-      </Button>
-      <Button
-        onClick={handleClick({
-          vertical: "bottom",
-          horizontal: "right",
-        })}
-      >
-        Bottom-Right
-      </Button>
-      <Button
-        onClick={handleClick({
-          vertical: "bottom",
-          horizontal: "center",
-        })}
-      >
-        Bottom-Center
-      </Button>
-      <Button
-        onClick={handleClick({
-          vertical: "bottom",
-          horizontal: "left",
-        })}
-      >
-        Bottom-Left
-      </Button>
-      <Button
-        onClick={handleClick({
-          vertical: "top",
-          horizontal: "left",
-        })}
-      >
-        Top-Left
-      </Button>
-    </React.Fragment>
-  );
 
   return (
     <div>
