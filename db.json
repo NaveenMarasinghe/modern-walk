@@ -185,6 +185,12 @@
       "email": "mare@gmail.com",
       "password": "1",
       "id": 2
+    },
+    {
+      "name": "Jane",
+      "email": "jane@gmail.com",
+      "password": "1",
+      "id": 3
     }
   ]
 }
