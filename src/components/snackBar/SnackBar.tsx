@@ -27,7 +27,7 @@ export default function SnackBar({ alert }: Props) {
     vertical: "top",
     horizontal: "center",
   });
-  const { vertical, horizontal, open } = state;
+  const { vertical, horizontal } = state;
 
   const handleClick = (newState: SnackbarOrigin) => () => {
     setState({ open: true, ...newState });
@@ -39,59 +39,6 @@ export default function SnackBar({ alert }: Props) {
   ) => {
     closeAlert();
   };
-
-  const buttons = (
-    <React.Fragment>
-      <Button
-        onClick={handleClick({
-          vertical: "top",
-          horizontal: "center",
-        })}
-      >
-        Top-Center
-      </Button>
-      <Button
-        onClick={handleClick({
-          vertical: "top",
-          horizontal: "right",
-        })}
-      >
-        Top-Right
-      </Button>
-      <Button
-        onClick={handleClick({
-          vertical: "bottom",
-          horizontal: "right",
-        })}
-      >
-        Bottom-Right
-      </Button>
-      <Button
-        onClick={handleClick({
-          vertical: "bottom",
-          horizontal: "center",
-        })}
-      >
-        Bottom-Center
-      </Button>
-      <Button
-        onClick={handleClick({
-          vertical: "bottom",
-          horizontal: "left",
-        })}
-      >
-        Bottom-Left
-      </Button>
-      <Button
-        onClick={handleClick({
-          vertical: "top",
-          horizontal: "left",
-        })}
-      >
-        Top-Left
-      </Button>
-    </React.Fragment>
-  );
 
   return (
     <div>

@@ -50,11 +50,9 @@ export default function Login() {
 
   let navigate = useNavigate();
 
-  React.useEffect(() => {
-    if (redirect) {
-      navigate("/login");
-    }
-  }, [redirect]);
+  if (redirect) {
+    navigate("/login");
+  }
 
   return (
     <ThemeProvider theme={theme}>
