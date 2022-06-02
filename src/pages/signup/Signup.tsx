@@ -12,7 +12,6 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { UserAPI } from "src/services/user.services";
 import { useNavigate } from "react-router-dom";
-import PageTemplate from "../../sections/pageTemplate/PageTemplate";
 
 const theme = createTheme();
 

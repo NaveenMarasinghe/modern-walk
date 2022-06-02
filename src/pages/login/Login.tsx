@@ -15,7 +15,6 @@ import { useApp } from "../../context/appContext";
 import { useNavigate } from "react-router-dom";
 import { UserAPI } from "../../services/user.services";
 import PageTemplate from "../../sections/pageTemplate/PageTemplate";
-import SnackBar from "../../components/snackBar/SnackBar";
 
 const theme = createTheme();
 
@@ -24,8 +23,8 @@ export default function Login() {
   const [password, setPassword] = React.useState<string>("");
   const [redirect, setRedirect] = React.useState<boolean>(false);
 
-  const { loginUser, user } = useUser();
-  const { alertMessage, openAlert } = useApp();
+  const { loginUser } = useUser();
+  const { openAlert } = useApp();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,11 +38,9 @@ export default function Login() {
 
   let navigate = useNavigate();
 
-  React.useEffect(() => {
-    if (redirect) {
-      navigate("/");
-    }
-  }, [redirect]);
+  if (redirect) {
+    navigate("/");
+  }
 
   return (
     <PageTemplate>

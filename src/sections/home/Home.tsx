@@ -9,10 +9,14 @@ import { useQuery } from "react-query";
 import { axiosInstance } from "../../services/api.services";
 
 export default function Home() {
-  const { isLoading, data } = useQuery("clothing", async () => {
-    const { data } = await axiosInstance.get("clothing");
-    return data;
-  });
+  const { isLoading, data } = useQuery(
+    "clothing",
+    async () => {
+      const { data } = await axiosInstance.get("clothing");
+      return data;
+    },
+    { retryDelay: 1000 }
+  );
 
   return (
     <div className="homeContainer">

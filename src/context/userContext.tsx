@@ -11,7 +11,7 @@ type UserCTXType = {
   logoutUser: () => void;
 };
 
-export const UserContext = React.createContext<UserCTXType | null>(null);
+const UserContext = React.createContext<UserCTXType | null>(null);
 
 const UserProvider = ({ children }: Props) => {
   const [user, setUser] = React.useState<User | null>(null);

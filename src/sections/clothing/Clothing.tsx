@@ -31,10 +31,14 @@ export default function Clothing({ category }: Props) {
     }
   }, [category]);
 
-  const { isLoading, data } = useQuery("clothing", async () => {
-    const { data } = await axiosInstance.get(`/${category}`);
-    return data;
-  });
+  const { isLoading, data } = useQuery(
+    "clothing",
+    async () => {
+      const { data } = await axiosInstance.get(`/${category}`);
+      return data;
+    },
+    { retryDelay: 1000 }
+  );
 
   // const { status, data } = useQuery("clothing", ProductAPI.clothing(category));
 
