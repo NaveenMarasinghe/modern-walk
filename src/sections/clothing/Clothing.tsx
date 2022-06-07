@@ -3,65 +3,52 @@ import "./clothing.css";
 import Card from "../../components/card/Card";
 import { Items, CategoryDetails } from "@typesData/items";
 import { useQuery } from "react-query";
-import { axiosInstance } from "../../services/api.services";
+import { ProductAPI } from "../../services/product.services";
+import { ClothingType } from "../../services/product.services";
 
-type Props = {
-  category: string;
+type ClothingProp = {
+  category: ClothingType;
 };
 
-export default function Clothing({ category }: Props) {
+export default function Clothing({ category }: ClothingProp) {
   const [categoryDetails, setCategoryDetails] =
     useState<CategoryDetails | null>(null);
 
+  const { isLoading, data } = useQuery(category, async () => {
+    return await ProductAPI.clothing(category);
+  });
+
   useEffect(() => {
-    if (category === "women") {
-      setCategoryDetails({
-        id: 1,
-        categoryTitle: "Women's Clothing",
-        url: "women",
-      });
-    } else if (category === "men") {
-      setCategoryDetails({
-        id: 2,
-        categoryTitle: "Men's Clothing",
-        url: "men",
-      });
+    switch (category) {
+      case "women":
+        setCategoryDetails({
+          id: 1,
+          categoryTitle: "Women's Clothing",
+          url: "women",
+        });
+        break;
+      case "men":
+        setCategoryDetails({
+          id: 2,
+          categoryTitle: "Men's Clothing",
+          url: "men",
+        });
+        break;
     }
   }, [category]);
-
-  const { isLoading, data } = useQuery(
-    "clothing",
-    async () => {
-      const { data } = await axiosInstance.get(`/${category}`);
-      return data;
-    },
-    { retryDelay: 1000 }
-  );
-
-  // const { status, data } = useQuery("clothing", ProductAPI.clothing(category));
-
-  // useEffect(() => {
-  //   if (categoryDetails?.url) {
-  //     const query = useQuery("clothing", async () => {
-  //       const { data } = await axiosInstance.get(`/${category}`);
-  //       return data;
-  //     });
-  //     console.log(query);
-  //     // const { status, data, error, isFetching } = ProductAPI.useGetClothing(
-  //     //   categoryDetails.url
-  //     // );
-  //     // console.log(data);
-  //   }
-  // }, [categoryDetails]);
 
   return (
     <div>
       <h2>{categoryDetails?.categoryTitle}</h2>
       <div className="clothingContainer">
         {isLoading && <div>Loading...</div>}
-        {data?.map((item: Items) => (
-          <Card key={item.id} data={item} type={categoryDetails?.id} />
-        ))}
+        {!data?.error ? (
+          data?.result?.data?.map((item: Items) => (
+            <Card key={item.id} data={item} type={categoryDetails?.id} />
+          ))
+        ) : (
+          <div>{data?.error?.message}</div>
+        )}
       </div>
     </div>
   );
