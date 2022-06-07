@@ -1,20 +1,25 @@
 import { axiosInstance } from "./api.services";
-import { useQuery } from "react-query";
+import { ItemsResponse, ErrorResponse } from "../types/items";
 
-async function getClothing(category: string) {
+export type ClothingType = "men" | "women" | "clothing";
+
+export type Response = {
+  result?: ItemsResponse;
+  error?: ErrorResponse;
+};
+
+const clothing = async (category: ClothingType): Promise<Response> => {
   try {
-    const res = await axiosInstance.get(`/${category}`);
-    return res;
-  } catch (err) {
-    return err;
+    const result: ItemsResponse = await axiosInstance.get(`/${category}`);
+    console.log(result);
+    return { result: result };
+  } catch (err: any) {
+    const error = err as ErrorResponse;
+    console.log(error);
+    return { error: error };
   }
-}
-
-const clothing = async (category: string) => {
-  return await axiosInstance.get(`/${category}`);
 };
 
 export const ProductAPI = {
-  getClothing: getClothing,
   clothing: clothing,
 };
