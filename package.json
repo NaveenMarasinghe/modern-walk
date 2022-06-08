@@ -2,7 +2,6 @@
   "name": "modern-walk",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -30,8 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "api": "json-server --watch db.json --port 5000",
-    "serveApp": "npx serve -s build"
+    "api": "json-server --watch db.json --port 5000"
   },
   "browserslist": {
     "production": [
