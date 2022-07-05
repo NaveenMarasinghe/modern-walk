@@ -18,6 +18,7 @@ const UserProvider = ({ children }: Props) => {
 
   const loginUser = (user: User) => {
     const newUser: User = {
+      id: user.id,
       name: user.name,
       email: user.email,
     };

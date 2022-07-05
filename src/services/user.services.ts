@@ -1,7 +1,13 @@
 import { User } from "../types/user";
 import { axiosInstance } from "./api.services";
 
-async function signup(user: User) {
+type NewUser = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+async function signup(user: NewUser) {
   try {
     const res = await axiosInstance.post("/users", user);
     return res;

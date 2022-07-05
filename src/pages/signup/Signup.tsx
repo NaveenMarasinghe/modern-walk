@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 import PageTemplate from "../../sections/pageTemplate/PageTemplate";
 import "./signup.css";
 
-type UserData = {
+type NewUser = {
   name: string;
   email: string;
   password: string;
@@ -21,7 +21,7 @@ export default function Signup() {
   const [redirect, setRedirect] = React.useState<boolean>(false);
 
   const handleSubmit = async () => {
-    const userData: UserData = {
+    const userData: NewUser = {
       name: name,
       email: email,
       password: password,

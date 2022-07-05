@@ -15,6 +15,7 @@ export default function ShoppingCart({ setOpen, open }: Props) {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <Dialog
       open={open}

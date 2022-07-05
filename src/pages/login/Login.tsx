@@ -20,7 +20,11 @@ export default function Login() {
   const handleSubmit = async () => {
     const response: any = await UserAPI.login(email, password);
     if (response.data) {
-      loginUser({ name: response.data[0].name, email: response.data[0].email });
+      loginUser({
+        id: response.data[0].id,
+        name: response.data[0].name,
+        email: response.data[0].email,
+      });
       openAlert("Login Successful");
       setRedirect(true);
     } else alert("Incorrect email or password");

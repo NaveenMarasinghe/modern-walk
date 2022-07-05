@@ -31,12 +31,23 @@
 }
 
 .cardBottom {
-    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 35%;
     margin-top: 10px;
     border-radius: 20px;
     background: #2BD9AF;
     text-align: center;
     padding: 10px 20px;
+}
+
+.cardDescription{
+    max-height: 300px;
+}
+
+.cardDescription:last-child{
+    justify-self: end;
 }
 
 .cardPrice {
@@ -52,3 +63,8 @@
 .men {
     background-color: #2BD9AF;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
