@@ -5,6 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@headlessui/react": "^1.6.5",
+    "@heroicons/react": "^1.0.6",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.7.0",
     "@testing-library/jest-dom": "^5.16.4",
@@ -25,11 +27,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "localstart": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "api": "json-server --watch db.json --port 5000"
+    "api": "json-server --watch db.json --port 5000",
+    "start": "node_modules/react-scripts/bin/react-scripts.js start"
   },
   "browserslist": {
     "production": [
@@ -42,5 +45,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.4"
   }
 }

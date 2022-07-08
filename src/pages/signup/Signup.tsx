@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 import PageTemplate from "../../sections/pageTemplate/PageTemplate";
 import "./signup.css";
 
-type UserData = {
+type NewUser = {
   name: string;
   email: string;
   password: string;
@@ -21,7 +21,7 @@ export default function Signup() {
   const [redirect, setRedirect] = React.useState<boolean>(false);
 
   const handleSubmit = async () => {
-    const userData: UserData = {
+    const userData: NewUser = {
       name: name,
       email: email,
       password: password,
@@ -96,16 +96,14 @@ export default function Signup() {
               onChange={(e) => setRepeatPassword(e.target.value)}
             />
           </div>
-          <div className="signupButtonRow">
-            <Button
+          <div className="signupButtonRow text-center my-2">
+            <button
               type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              className="btn-2-primary hover:btn-2-primary-hover active:btn-2-primary-clicked"
               onClick={handleSubmit}
             >
               Sign up
-            </Button>
+            </button>
           </div>
           <div className="signupSignupRow">
             <Link href="/login" variant="body2">

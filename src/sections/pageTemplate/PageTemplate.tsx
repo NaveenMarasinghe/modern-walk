@@ -1,7 +1,6 @@
 import * as React from "react";
 import "./pageTemplate.css";
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
 import ShoppingCart from "../../components/shoppingCart/ShoppingCart";
 import { useUser } from "../../context/userContext";
 import { useApp } from "../../context/appContext";
@@ -16,10 +15,6 @@ export default function PageTemplate({ children }: Props) {
 
   const { logoutUser, user } = useUser();
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleLogout = () => {
     logoutUser();
     openAlert("Logged out successfully");
@@ -29,7 +24,6 @@ export default function PageTemplate({ children }: Props) {
 
   return (
     <div className="homeContainer">
-      <ShoppingCart setOpen={setOpen} open={open} />
       <div className="header">
         <div className="header-left"></div>
         <div className="header-center">
@@ -40,22 +34,19 @@ export default function PageTemplate({ children }: Props) {
         <div className="header-right">
           {user?.name ? (
             <div className="header-right-items">
-              <Button sx={{ fontWeight: "bold" }}>Hi {user?.name}</Button>
-              <Button onClick={handleClickOpen} sx={{ fontWeight: "bold" }}>
-                Shopping Cart
-              </Button>
-              <Button onClick={handleLogout} sx={{ fontWeight: "bold" }}>
+              <ShoppingCart setOpen={setOpen} open={open} />
+              <button
+                onClick={handleLogout}
+                className="btn-2-primary mx-2 hover:btn-2-primary-hover active:btn-2-primary-clicked"
+              >
                 Logout
-              </Button>
+              </button>
             </div>
           ) : (
             <Link to="/login" style={{ textDecoration: "none" }}>
-              <Button
-                className="header-right-button"
-                sx={{ fontWeight: "bold" }}
-              >
-                login
-              </Button>
+              <button className="btn-2-primary mx-2 hover:btn-2-primary-hover active:btn-2-primary-clicked">
+                Login
+              </button>
             </Link>
           )}
         </div>

@@ -20,7 +20,11 @@ export default function Login() {
   const handleSubmit = async () => {
     const response: any = await UserAPI.login(email, password);
     if (response.data) {
-      loginUser({ name: response.data[0].name, email: response.data[0].email });
+      loginUser({
+        id: response.data[0].id,
+        name: response.data[0].name,
+        email: response.data[0].email,
+      });
       openAlert("Login Successful");
       setRedirect(true);
     } else alert("Incorrect email or password");
@@ -53,16 +57,14 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="loginButtonRow">
-            <Button
+          <div className="loginButtonRow text-center">
+            <button
               type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              className="btn-2-primary hover:btn-2-primary-hover active:btn-2-primary-clicked"
               onClick={handleSubmit}
             >
               Log in
-            </Button>
+            </button>
           </div>
           <div className="loginSignupRow">
             <Link href="/signup" variant="body2">

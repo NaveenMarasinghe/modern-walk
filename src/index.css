@@ -12,3 +12,62 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn{
+    @apply px-6 pt-3.5 pb-2.5 rounded-lg font-bold text-base cursor-pointer h-12
+  }
+  .btn-2-primary {
+    @apply btn bg-primary text-white border-none
+  }
+  .btn-2-primary-hover {
+    @apply btn bg-primary-hover text-white border-none drop-shadow-button
+  }
+  .btn-2-primary-clicked {
+    @apply btn bg-primary-selected text-white border-none drop-shadow-button
+  }
+  .btn-2-primary-disabled {
+    @apply btn bg-primary text-white border-none
+  }
+  .btn-1 {
+    @apply btn bg-white text-primary border border-primary
+  }
+  .btn-1-hover {
+    @apply btn bg-primary-inverse-hover text-primary-hover drop-shadow-button border border-primary-hover
+  }
+  .btn-1-clicked {
+    @apply btn bg-primary-inverse-hover-click text-primary-selected drop-shadow-button border border-primary-selected
+  }
+  .btn-1-disabled{
+    @apply btn bg-white text-primary-inverse-hover border-none drop-shadow-normal
+  }
+
+  .btn-danger-primary {
+    @apply btn bg-danger-color text-white border-none
+  }
+  .btn-danger-primary-hover {
+    @apply btn bg-danger-color-hover text-white border-none drop-shadow-button
+  }
+  .btn-danger-primary-clicked {
+    @apply btn bg-danger-color-active text-white border-none drop-shadow-button
+  }
+  .btn-danger-primary-disabled {
+    @apply btn bg-danger-color-disabled text-white border-none
+  }
+
+  .btn-danger-sec {
+    @apply btn bg-white text-danger-color border border-danger-color
+  }
+  .btn-danger-sec-hover {
+    @apply btn bg-danger-color-inactive text-danger-color-hover drop-shadow-button border border-danger-color-hover
+  }
+  .btn-danger-sec-clicked {
+    @apply btn bg-danger-color-glow text-danger-color-active drop-shadow-button border border-danger-color-active
+  }
+
+}
