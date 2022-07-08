@@ -57,16 +57,14 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="loginButtonRow">
-            <Button
+          <div className="loginButtonRow text-center">
+            <button
               type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              className="btn-2-primary hover:btn-2-primary-hover active:btn-2-primary-clicked"
               onClick={handleSubmit}
             >
               Log in
-            </Button>
+            </button>
           </div>
           <div className="loginSignupRow">
             <Link href="/signup" variant="body2">

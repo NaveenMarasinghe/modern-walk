@@ -81,7 +81,7 @@ export default function AddToCartModal({ data }: Props) {
         <button
           type="button"
           onClick={openModal}
-          className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 hover:cursor-pointer"
+          className="btn-2-primary hover:btn-2-primary-hover active:btn-2-primary-clicked"
         >
           Add to cart
         </button>
@@ -112,14 +112,20 @@ export default function AddToCartModal({ data }: Props) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-xl font-medium leading-6 text-gray-900 mt-0 text-center"
-                  >
-                    Add to cart
-                  </Dialog.Title>
-                  <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all drop-shadow-selected">
+                  <div className="flex justify-between p-8">
+                    <Dialog.Title as="div" className="text-2xl font-bold">
+                      Add to cart
+                    </Dialog.Title>
+                    <div
+                      className="text-xl text-gray cursor-pointer"
+                      onClick={closeModal}
+                    >
+                      x
+                    </div>
+                  </div>
+
+                  <div className="overflow-hidden rounded-lg px-8">
                     <div className="flex flex-col bg-white p-3">
                       <div className="flex">
                         <div className="image flex-1">
@@ -139,14 +145,16 @@ export default function AddToCartModal({ data }: Props) {
                           <div className="mb-1 text-center">Qty</div>
                           <div className="flex justify-center">
                             <button
-                              className="mx-2"
+                              className="h-8 w-8 rounded-lg border-none text-2xl bg-transparent hover:bg-primary-inverse-hover active:bg-primary-inverse-hover-click text-primary mx-2 align-middle"
                               onClick={() => handleMinus()}
                             >
                               -
                             </button>
-                            <div className="div">{qty}</div>
+                            <div className="h-8 w-8 text-center inline-flex justify-center items-center">
+                              {qty}
+                            </div>
                             <button
-                              className="mx-2"
+                              className="h-8 w-8 rounded-lg border-none text-2xl bg-transparent hover:bg-primary-inverse-hover active:bg-primary-inverse-hover-click text-primary mx-2 align-middle"
                               onClick={() => {
                                 handlePlus();
                               }}
@@ -161,18 +169,29 @@ export default function AddToCartModal({ data }: Props) {
                         </div>
                       </div>
                     </div>
-                    <div className="bg-slate-50 text-center p-2">
-                      {!added ? (
-                        <button className=" p-2 " onClick={handleAdd}>
-                          Add to cart
-                        </button>
-                      ) : (
-                        <div className=" text-green-700 text-lg">
-                          Item added successfully
-                        </div>
-                      )}
-                    </div>
                   </div>
+                  {!added ? (
+                    <div className="bg-elephant-grey text-center p-4 flex">
+                      <button
+                        className="btn-1 mx-4 hover:btn-1-hover active:btn-1-clicked w-full flex-1 border-dashed"
+                        onClick={closeModal}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className="btn-2-primary mx-4 hover:btn-2-primary-hover active:btn-2-primary-clicked w-full flex-1"
+                        onClick={handleAdd}
+                      >
+                        Add to cart
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex bg-elephant-grey justify-center items-center h-20">
+                      <div className=" text-primary text-lg">
+                        Item added successfully
+                      </div>
+                    </div>
+                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

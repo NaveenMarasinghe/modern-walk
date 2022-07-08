@@ -96,16 +96,14 @@ export default function Signup() {
               onChange={(e) => setRepeatPassword(e.target.value)}
             />
           </div>
-          <div className="signupButtonRow">
-            <Button
+          <div className="signupButtonRow text-center my-2">
+            <button
               type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              className="btn-2-primary hover:btn-2-primary-hover active:btn-2-primary-clicked"
               onClick={handleSubmit}
             >
               Sign up
-            </Button>
+            </button>
           </div>
           <div className="signupSignupRow">
             <Link href="/login" variant="body2">
