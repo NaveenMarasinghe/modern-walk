@@ -56,9 +56,19 @@ async function removeFromCart(id: number) {
   }
 }
 
+async function clearCart(userId: number) {
+  try {
+    const res = await axiosInstance.delete(`/cart?userId=${userId}`);
+    return res;
+  } catch (err) {
+    return err;
+  }
+}
+
 export const ProductAPI = {
   clothing: clothing,
   getCart: getCart,
   addToCart: addToCart,
   removeFromCart: removeFromCart,
+  clearCart: clearCart,
 };

@@ -1,0 +1,12 @@
+@mixin input() {
+  @apply w-full p-[12px] rounded-lg text-base bg-white outline-none border border-solid border-font-inactive-border focus:border-primary flex items-center;
+}
+
+.primary {
+  @include input();
+}
+
+.icon {
+  @include input();
+  @apply py-[12px] pr-[48px] pl-[12px];
+}

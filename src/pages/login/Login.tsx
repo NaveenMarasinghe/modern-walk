@@ -7,19 +7,27 @@ import { useApp } from "../../context/appContext";
 import { Navigate } from "react-router-dom";
 import { UserAPI } from "../../services/user.services";
 import PageTemplate from "../../sections/pageTemplate/PageTemplate";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import "./login.css";
+import { CheckBox } from "@mui/icons-material";
+import Input from "../../components/input/Input";
 
 export default function Login() {
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [redirect, setRedirect] = React.useState<boolean>(false);
+  const [checkboxStatus, setCheckboxStatus] = React.useState(null);
+  const [loginError, setLoginError] = React.useState(0);
 
   const { loginUser } = useUser();
   const { openAlert } = useApp();
 
   const handleSubmit = async () => {
     const response: any = await UserAPI.login(email, password);
-    if (response.data) {
+    if (response.data[0]) {
+      console.log(response);
+      setLoginError(0);
       loginUser({
         id: response.data[0].id,
         name: response.data[0].name,
@@ -27,16 +35,76 @@ export default function Login() {
       });
       openAlert("Login Successful");
       setRedirect(true);
-    } else alert("Incorrect email or password");
+    } else {
+      setLoginError(1);
+    }
   };
 
   return (
-    <PageTemplate>
+    <>
       {redirect && <Navigate replace to="/" />}
-      <div className="loginContainer">
-        <div className="loginBox">
-          <div className="loginTitle">Log in</div>
-          <div className="loginEmailRow">
+      <div className="h-screen w-screen flex justify-center items-center">
+        <div className="w-[20%]">
+          <div className="mb-[70px] text-5xl text-font-main font-bold text-center">
+            Modern Walk
+          </div>
+          <div className="text-sm font-normal mb-1 flex">
+            <div>Email address</div>
+            <span className="text-primary">*</span>
+          </div>
+          <Input
+            varient="primary"
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {loginError === 1 && (
+            <div className="text-sm font-normal mb-1 flex text-danger-color">
+              Please enter a valid email address
+            </div>
+          )}
+          {loginError === 2 && (
+            <div className="text-sm font-normal mb-1 flex text-danger-color">
+              We couldn't find your account. Try again or contact your admin
+            </div>
+          )}
+          <div className="text-sm font-normal mt-6 mb-1 flex">
+            <div>Password</div>
+            <span className="text-primary">*</span>
+          </div>
+          <div className="relative">
+            <Input
+              varient="primary"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div className="flex justify-center items-center absolute right-[12px] top-3 ">
+              <VisibilityOffIcon className="hover:cursor-pointer" />
+            </div>
+          </div>
+          {loginError === 3 && (
+            <div className="text-sm font-normal mb-1 flex text-danger-color">
+              Invalid password
+            </div>
+          )}
+          <div className="text-primary mt-1 text-sm font-normal hover:cursor-pointer">
+            Forgot password?
+          </div>
+          <div className="mt-8 flex justify-between">
+            <div className="text-base flex items-center hover:cursor-pointer">
+              <CheckBoxOutlineBlankIcon className="text-primary h-8 w-8 p-1" />
+              <div>Remember me</div>
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="btn-2-primary hover:btn-2-primary-hover active:btn-2-primary-clicked"
+                onClick={handleSubmit}
+              >
+                Sign in
+              </button>
+            </div>
+          </div>
+          {/* <div className="loginEmailRow">
             <TextField
               required
               fullWidth
@@ -56,23 +124,14 @@ export default function Login() {
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
-          <div className="loginButtonRow text-center">
-            <button
-              type="submit"
-              className="btn-2-primary hover:btn-2-primary-hover active:btn-2-primary-clicked"
-              onClick={handleSubmit}
-            >
-              Log in
-            </button>
-          </div>
-          <div className="loginSignupRow">
+          </div> */}
+          {/* <div className="loginSignupRow">
             <Link href="/signup" variant="body2">
               {"Don't have an account? Sign Up"}
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
-    </PageTemplate>
+    </>
   );
 }
