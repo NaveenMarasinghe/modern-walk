@@ -1,6 +1,10 @@
 import { Dispatch, Fragment, useState } from "react";
 import { Popover, Transition, Dialog } from "@headlessui/react";
 import ShoppingCartTable from "../shoppingCartTable/ShoppingCartTable";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ProductAPI } from "../../services/product.services";
+import { useUser } from "../../context/userContext";
+import { useMutation, useQueryClient } from "react-query";
 
 type Props = {
   setOpen: Dispatch<React.SetStateAction<boolean>>;
@@ -8,6 +12,9 @@ type Props = {
 };
 
 export default function ShoppingCart({ setOpen, open }: Props) {
+  const [showShoppingCart, setShowShoppingCart] = useState(false);
+  const { user } = useUser();
+  const queryClient = useQueryClient();
   const handleClose = () => {
     setOpen(false);
   };
@@ -22,11 +29,39 @@ export default function ShoppingCart({ setOpen, open }: Props) {
     setIsOpen(true);
   }
 
+  const handleShoppingCartButton = () => {
+    setShowShoppingCart(!showShoppingCart);
+  };
+
+  const clearCart = async () => {
+    if (user?.id) {
+      const res = ProductAPI.clearCart(user?.id);
+      console.log(res);
+      return res;
+    }
+  };
+
+  const mutation = useMutation(clearCart, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getCart");
+    },
+  });
+
+  const handleClearCart = () => {
+    mutation.mutate();
+    closeModal();
+  };
+
   return (
     <Popover className="relative">
-      <Popover.Button className="btn-2-primary mx-4 hover:btn-2-primary-hover active:btn-2-primary-clicked">
-        Shopping Cart
+      <Popover.Button
+        className="btn-2-primary mx-4 hover:btn-2-primary-hover active:btn-2-primary-clicked"
+        onClick={handleShoppingCartButton}
+      >
+        <ShoppingCartIcon />
       </Popover.Button>
+
+      {/* clear cart modal */}
       <>
         <Transition appear show={isOpen} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -80,7 +115,7 @@ export default function ShoppingCart({ setOpen, open }: Props) {
                       <button
                         type="button"
                         className="btn-danger-primary m-0 hover:m-0 active:m-0 hover:btn-danger-primary-hover active:btn-danger-primary-clicked"
-                        onClick={closeModal}
+                        onClick={handleClearCart}
                       >
                         Clear cart
                       </button>
@@ -92,37 +127,39 @@ export default function ShoppingCart({ setOpen, open }: Props) {
           </Dialog>
         </Transition>
       </>
-      <Popover.Panel unmount={false} className="absolute z-10 right-0">
-        <div className="bg-white rounded-xl pt-8 drop-shadow-selected">
-          <ShoppingCartTable />
-          {/* {({ close }) => (
-            <button
-              onClick={async () => {
-                closeModal;
-                close();
-              }}
-            >
-              Close
-            </button>
-          )} */}
-          <div className="flex justify-end mr-4 py-3">
-            <button
-              className="btn-1 mx-2 hover:btn-1-hover active:btn-1-clicked border-dashed"
-              onClick={async () => {
-                close();
-              }}
-            >
-              Close
-            </button>
-            <button
-              className="btn-2-primary mx-2 hover:btn-2-primary-hover active:btn-2-primary-clicked"
-              onClick={openModal}
-            >
-              Clear cart
-            </button>
+
+      <Transition
+        as={Fragment}
+        show={showShoppingCart}
+        enter="transition ease-out duration-200"
+        enterFrom="opacity-0 translate-y-1"
+        enterTo="opacity-100 translate-y-0"
+        leave="transition ease-in duration-150"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-1"
+      >
+        <Popover.Panel unmount={false} className="absolute z-10 right-0">
+          <div className="bg-white rounded-xl pt-8 drop-shadow-selected">
+            <ShoppingCartTable />
+            <div className="flex justify-end mr-4 py-3">
+              <button
+                className="btn-1 mx-2 hover:btn-1-hover active:btn-1-clicked border-dashed"
+                onClick={async () => {
+                  setShowShoppingCart(false);
+                }}
+              >
+                Close
+              </button>
+              <button
+                className="btn-2-primary mx-2 hover:btn-2-primary-hover active:btn-2-primary-clicked"
+                onClick={openModal}
+              >
+                Clear cart
+              </button>
+            </div>
           </div>
-        </div>
-      </Popover.Panel>
+        </Popover.Panel>
+      </Transition>
     </Popover>
   );
 }

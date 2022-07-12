@@ -5,6 +5,7 @@ import Link from "@mui/material/Link";
 import { UserAPI } from "src/services/user.services";
 import { Navigate } from "react-router-dom";
 import PageTemplate from "../../sections/pageTemplate/PageTemplate";
+import Input from "../../components/input/Input";
 import "./signup.css";
 
 type NewUser = {
@@ -40,59 +41,54 @@ export default function Signup() {
   };
 
   return (
-    <PageTemplate>
+    <>
       {redirect && <Navigate replace to="/login" />}
-      <div className="signupContainer">
-        <div className="signupBox">
-          <div className="signupTitle">Sign up</div>
+      <div className="h-screen w-screen flex justify-center items-center">
+        <div className="w-[20%]">
+          <div className="mb-[70px] text-5xl text-font-main font-bold text-center">
+            Modern Walk
+          </div>
           <div className="signupTextRow">
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="Name"
-              name="name"
-              autoComplete="name"
-              autoFocus
+            <div className="text-sm font-normal my-1 flex">
+              <div>Name</div>
+              <span className="text-primary">*</span>
+            </div>
+            <Input
+              type="text"
+              varient="primary"
               onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="signupTextRow">
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+            <div className="text-sm font-normal my-1 flex">
+              <div>Email address</div>
+              <span className="text-primary">*</span>
+            </div>
+            <Input
+              type="text"
+              varient="primary"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="signupTextRow">
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+            <div className="text-sm font-normal my-1 flex">
+              <div>Password</div>
+              <span className="text-primary">*</span>
+            </div>
+            <Input
+              type="text"
+              varient="primary"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="signupTextRow">
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="passwordAgian"
-              label="Repeat Password"
-              type="password"
-              id="repeatPassword"
-              autoComplete="repeat-password"
+            <div className="text-sm font-normal my-1 flex">
+              <div>Repeat password</div>
+              <span className="text-primary">*</span>
+            </div>
+            <Input
+              type="text"
+              varient="primary"
               onChange={(e) => setRepeatPassword(e.target.value)}
             />
           </div>
@@ -112,6 +108,6 @@ export default function Signup() {
           </div>
         </div>
       </div>
-    </PageTemplate>
+    </>
   );
 }
