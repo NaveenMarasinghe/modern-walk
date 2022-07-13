@@ -8,7 +8,9 @@ import { Navigate } from "react-router-dom";
 import { UserAPI } from "../../services/user.services";
 import PageTemplate from "../../sections/pageTemplate/PageTemplate";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import "./login.css";
 import { CheckBox } from "@mui/icons-material";
 import Input from "../../components/input/Input";
@@ -19,6 +21,9 @@ export default function Login() {
   const [redirect, setRedirect] = React.useState<boolean>(false);
   const [checkboxStatus, setCheckboxStatus] = React.useState(null);
   const [loginError, setLoginError] = React.useState(0);
+  const [pwInputType, setPwInputType] = React.useState<string>("password");
+  const [rememberPw, setRememberPw] = React.useState(false);
+  const [rememberedEmail, setRememberedEmail] = React.useState("");
 
   const { loginUser } = useUser();
   const { openAlert } = useApp();
@@ -34,11 +39,29 @@ export default function Login() {
         email: response.data[0].email,
       });
       openAlert("Login Successful");
+      if (rememberPw) {
+        localStorage.setItem("mwemail", email);
+      }
       setRedirect(true);
     } else {
       setLoginError(1);
     }
   };
+
+  const toglePwInputType = () => {
+    if (pwInputType === "password") {
+      setPwInputType("text");
+    } else {
+      setPwInputType("password");
+    }
+  };
+
+  React.useEffect(() => {
+    const email = localStorage.getItem("mwemail");
+    if (email) {
+      setEmail(email);
+    }
+  });
 
   return (
     <>
@@ -55,6 +78,7 @@ export default function Login() {
           <Input
             varient="primary"
             type="text"
+            id="email"
             onChange={(e) => setEmail(e.target.value)}
           />
           {loginError === 1 && (
@@ -74,11 +98,22 @@ export default function Login() {
           <div className="relative">
             <Input
               varient="primary"
-              type="password"
+              type={pwInputType}
               onChange={(e) => setPassword(e.target.value)}
             />
             <div className="flex justify-center items-center absolute right-[12px] top-3 ">
-              <VisibilityOffIcon className="hover:cursor-pointer" />
+              {pwInputType === "password" && (
+                <VisibilityOffIcon
+                  className="hover:cursor-pointer"
+                  onClick={toglePwInputType}
+                />
+              )}
+              {pwInputType === "text" && (
+                <VisibilityIcon
+                  className="hover:cursor-pointer"
+                  onClick={toglePwInputType}
+                />
+              )}
             </div>
           </div>
           {loginError === 3 && (
@@ -91,8 +126,18 @@ export default function Login() {
           </div>
           <div className="mt-8 flex justify-between">
             <div className="text-base flex items-center hover:cursor-pointer">
-              <CheckBoxOutlineBlankIcon className="text-primary h-8 w-8 p-1" />
-              <div>Remember me</div>
+              {rememberPw ? (
+                <CheckBoxIcon
+                  className="text-primary hover:bg-primary-inverse-hover rounded-lg h-8 w-8 p-1"
+                  onClick={() => setRememberPw(!rememberPw)}
+                />
+              ) : (
+                <CheckBoxOutlineBlankIcon
+                  className="text-font-main hover:text-primary hover:bg-primary-inverse-hover rounded-lg h-8 w-8 p-1"
+                  onClick={() => setRememberPw(!rememberPw)}
+                />
+              )}
+              <div className="ml-1">Remember me</div>
             </div>
             <div>
               <button

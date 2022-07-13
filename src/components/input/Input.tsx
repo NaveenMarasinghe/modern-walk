@@ -1,13 +1,11 @@
-import { ChangeEvent } from "react";
 import "./input.scss";
-
-type Varient = "primary" | "password";
 
 type Props = {
   varient?: string;
   className?: string;
   children?: React.ReactNode;
   type?: string;
+  id?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -16,6 +14,7 @@ export default function Input({
   className,
   children,
   type,
+  id,
   onChange,
 }: Props) {
   const returnVarient = () => {
@@ -35,6 +34,7 @@ export default function Input({
       type={type}
       className={returnVarient() + returnClassName()}
       onChange={onChange}
+      id={id}
     >
       {children}
     </input>

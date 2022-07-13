@@ -5,6 +5,7 @@ import ShoppingCart from "../../components/shoppingCart/ShoppingCart";
 import { useUser } from "../../context/userContext";
 import { useApp } from "../../context/appContext";
 import SnackBar from "../../components/snackBar/SnackBar";
+import Button from "../../components/button/Button";
 
 type Props = {
   children: React.ReactNode;
@@ -35,18 +36,13 @@ export default function PageTemplate({ children }: Props) {
           {user?.name ? (
             <div className="header-right-items">
               <ShoppingCart setOpen={setOpen} open={open} />
-              <button
-                onClick={handleLogout}
-                className="btn-2-primary mx-2 hover:btn-2-primary-hover active:btn-2-primary-clicked"
-              >
+              <Button varient="primary" onClick={handleLogout} className="mx-2">
                 Logout
-              </button>
+              </Button>
             </div>
           ) : (
             <Link to="/login" style={{ textDecoration: "none" }}>
-              <button className="btn-2-primary mx-2 hover:btn-2-primary-hover active:btn-2-primary-clicked">
-                Login
-              </button>
+              <Button varient="primary">Login</Button>
             </Link>
           )}
         </div>
