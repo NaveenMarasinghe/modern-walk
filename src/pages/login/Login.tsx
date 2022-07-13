@@ -61,7 +61,7 @@ export default function Login() {
     if (email) {
       setEmail(email);
     }
-  });
+  }, []);
 
   return (
     <>
@@ -78,7 +78,7 @@ export default function Login() {
           <Input
             varient="primary"
             type="text"
-            id="email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           {loginError === 1 && (

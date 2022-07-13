@@ -5,7 +5,7 @@ type Props = {
   className?: string;
   children?: React.ReactNode;
   type?: string;
-  id?: string;
+  value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -14,7 +14,7 @@ export default function Input({
   className,
   children,
   type,
-  id,
+  value,
   onChange,
 }: Props) {
   const returnVarient = () => {
@@ -34,7 +34,7 @@ export default function Input({
       type={type}
       className={returnVarient() + returnClassName()}
       onChange={onChange}
-      id={id}
+      value={value}
     >
       {children}
     </input>
