@@ -101,11 +101,11 @@ export default function Signup() {
               Sign up
             </button>
           </div>
-          <div className="signupSignupRow">
+          {/* <div className="signupSignupRow">
             <Link href="/login" variant="body2">
               {"Already have an account? Log in"}
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
