@@ -1,4 +1,4 @@
-import "./input.scss";
+import Styles from "./input.module.scss";
 
 type Props = {
   varient?: string;
@@ -19,7 +19,7 @@ export default function Input({
 }: Props) {
   const returnVarient = () => {
     if (varient) {
-      return varient;
+      return Styles[varient];
     }
   };
 
