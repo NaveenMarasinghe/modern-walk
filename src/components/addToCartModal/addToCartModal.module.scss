@@ -1,107 +1,107 @@
-.addToCartModalTransitionDiv {
+.modalRoot {
   @apply fixed inset-0 bg-black bg-opacity-25;
 }
 
-.addToCartModalContainer {
+.container {
   @apply fixed inset-0 overflow-y-auto;
 }
 
-.addToCartModalContent {
+.body {
   @apply flex min-h-full items-center justify-center p-4 text-center;
 }
 
-.addToCartModalDialogPanel {
+.panel {
   @apply w-full max-w-md transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all drop-shadow-selected;
 }
 
-.addToCartModalTitleContainer {
+.panelTitle {
   @apply flex justify-between p-8;
 }
 
-.addToCartModalTitle {
+.panelTitleText {
   @apply text-2xl font-bold;
 }
 
-.addToCartModalClose {
+.panelCloseIcon {
   @apply text-xl text-font-main cursor-pointer;
 }
 
-.addToCartModalContentContainer {
-  @apply overflow-hidden rounded-lg px-8;
+.details {
+  @apply overflow-hidden rounded-lg px-8 flex flex-col bg-white p-3;
 }
 
-.addToCartModalContent {
-  @apply flex flex-col bg-white p-3;
-}
-
-.addToCartModalContentBody {
+.detailsBody {
   @apply flex;
 }
 
-.addToCartModalContentImage {
+.detailsBodyImage {
   @apply flex-1;
 }
 
-.addToCartModalContentImageFile {
+.detailsBodyImageFile {
   @apply w-36;
 }
 
-.addToCartModalContentDetails {
+.detailsTitle {
   @apply flex-col w-full text-xl mx-3;
 }
 
-.addToCartModalContentTitle {
+.detailsTitleText {
   @apply w-full text-xl ml-3;
 }
 
-.addToCartModalContentPrice {
+.detailsPrice {
   @apply w-full text-xl ml-3 mt-5;
 }
 
-.addToCartModalQtyContainer {
+.qtyContainer {
   @apply flex justify-center;
 }
 
-.addToCartModalQtyBody {
+.qtyBody {
   @apply flex-1;
 }
 
-.addToCartModalQtyTitle {
+.qtyTitle {
   @apply mb-1 text-center;
 }
 
-.addToCartModalQtyChangeBody {
+.qtyChange {
   @apply flex justify-center;
 }
 
-.addToCartModalQtyChangeButton {
-  @apply h-8 w-8 rounded-lg border-none text-2xl bg-transparent hover:bg-primary-inverse-hover active:bg-primary-inverse-hover-click text-primary mx-2 align-middle;
+.qtyChangeIcon {
+  @apply h-8 w-8 cursor-pointer rounded-lg border-none text-2xl bg-transparent hover:bg-primary-inverse-hover active:bg-primary-inverse-hover-click text-primary mx-2 align-middle;
 }
 
-.addToCartModalQtyAmount {
+.qtyAmount {
   @apply h-8 w-8 text-center inline-flex justify-center items-center;
 }
 
-.addToCartModalTotalBody {
+.qtyTotal {
   @apply flex-1;
 }
 
-.addToCartModalTotalTitle {
+.qtyTotalTitle {
   @apply mb-1 text-center;
 }
 
-.addToCartModalTotalAmount {
+.qtyTotalAmount {
   @apply flex justify-center;
 }
 
-.addToCartModalButtonsContainer {
+.buttons {
   @apply bg-bg-elephant-grey text-center p-4 flex;
 }
 
-.addToCartModalSuccessMessage {
+.button {
+  @apply flex-1 mx-2;
+}
+
+.itemAdded {
   @apply flex bg-bg-elephant-grey justify-center items-center h-20;
 }
 
-.addToCartModalSuccessMessageBody {
+.itemAddedText {
   @apply text-primary text-lg;
 }

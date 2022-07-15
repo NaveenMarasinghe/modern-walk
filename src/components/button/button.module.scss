@@ -33,7 +33,7 @@
 // Secondary button with primary colors
 .secondary {
   @include button;
-  @apply bg-white text-primary border border-primary;
+  @apply bg-white text-primary border border-solid border-primary;
   @apply hover:bg-primary-inverse-hover hover:text-primary-hover hover:drop-shadow-button border hover:border-primary-hover;
   @apply active:bg-primary-inverse-hover-click active:text-primary-selected active:drop-shadow-button border active:border-primary-selected;
 }
@@ -41,13 +41,13 @@
 // Secondary button with primary colors for disabled button
 .secondary-disabled {
   @include button;
-  @apply bg-white text-primary-inverse-hover border-none drop-shadow-normal;
+  @apply bg-white text-primary-inverse-hover border border-solid drop-shadow-normal;
 }
 
 // Secondary button with danger colors
 .secondary-danger {
   @include button;
-  @apply bg-white text-danger-color border border-danger-color;
+  @apply bg-white text-danger-color border border-solid border-danger-color;
   @apply hover:bg-danger-color-inactive hover:text-danger-color-hover hover:drop-shadow-button hover:border-danger-color-hover;
   @apply active:bg-danger-color-glow active:text-danger-color-active active:drop-shadow-button active:border-danger-color-active;
 }
@@ -55,5 +55,5 @@
 // Secondary button with danger colors for disabled button
 .secondary-danger-disabled {
   @include button;
-  @apply bg-white text-danger-color border border-danger-color;
+  @apply bg-white text-danger-color border border-solid border-danger-color;
 }
